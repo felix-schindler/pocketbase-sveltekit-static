@@ -25,12 +25,12 @@ func init() {
 		settings.TrustedProxy.UseLeftmostIP = false
 		settings.RateLimits.Enabled = true
 
+		settings.Meta.SenderName = os.Getenv("SMTP_SENDER_NAME")
+		settings.Meta.SenderAddress = os.Getenv("SMTP_SENDER_ADDRESS")
 		settings.SMTP.Host = os.Getenv("SMTP_HOST")
 		settings.SMTP.Port, _ = strconv.Atoi(os.Getenv("SMTP_PORT"))
 		settings.SMTP.Username = os.Getenv("SMTP_USERNAME")
 		settings.SMTP.Password = os.Getenv("SMTP_PASSWORD")
-		settings.Meta.SenderAddress = os.Getenv("SMTP_SENDER_NAME")
-		settings.Meta.SenderName = os.Getenv("SMTP_SENDER_ADDRESS")
 		settings.SMTP.Enabled = true
 
 		return app.Save(settings)

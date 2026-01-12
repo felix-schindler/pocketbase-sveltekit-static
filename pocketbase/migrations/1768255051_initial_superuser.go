@@ -14,9 +14,15 @@ func init() {
 			return err
 		}
 
-		record := core.NewRecord(superusers)
+		email := os.Getenv("ADMIN_MAIL")
+		record, _ := app.FindAuthRecordByEmail(core.CollectionNameSuperusers, email)
 
-		record.Set("email", os.Getenv("ADMIN_MAIL"))
+		if record != nil {
+			return nil
+		}
+
+		record = core.NewRecord(superusers)
+		record.Set("email", email)
 		record.Set("password", os.Getenv("ADMIN_PASS"))
 
 		return app.Save(record)
