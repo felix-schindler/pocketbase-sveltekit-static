@@ -1,15 +1,17 @@
 import { applyAction } from '$app/forms';
 import { invalidateAll } from '$app/navigation';
 import { type SubmitFunction } from '@sveltejs/kit';
-import { type AuthRecord, ClientResponseError } from 'pocketbase';
+import { ClientResponseError } from 'pocketbase';
 import { writable } from 'svelte/store';
 
 import { pb } from '$lib/pocketbase';
 
-export const user = writable<AuthRecord>(null);
+import type { User } from './types';
+
+export const user = writable<User | null>(null);
 
 pb.authStore.onChange((_, authRecord) => {
-	user.set(authRecord);
+	user.set(authRecord as User);
 }, true);
 
 export const LoginAction: SubmitFunction = async ({ formData, cancel }) => {
@@ -32,7 +34,7 @@ export const LoginAction: SubmitFunction = async ({ formData, cancel }) => {
 };
 
 export const Logout = async () => {
-	await pb.authStore.clear();
+	pb.authStore.clear();
 	await invalidateAll();
 };
 

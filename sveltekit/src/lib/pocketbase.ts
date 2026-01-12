@@ -1,3 +1,5 @@
 import PocketBase from 'pocketbase';
 
-export const pb = new PocketBase();
+import type { TypedPocketBase } from './types';
+
+export const pb = new PocketBase() as TypedPocketBase;

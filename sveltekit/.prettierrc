@@ -18,5 +18,6 @@
 	],
 	"importOrder": ["^\\$lib/(.*)$", "^[./]"],
 	"importOrderSeparation": true,
-	"importOrderSortSpecifiers": true
+	"importOrderSortSpecifiers": true,
+	"tailwindStylesheet": "./src/routes/layout.css"
 }
