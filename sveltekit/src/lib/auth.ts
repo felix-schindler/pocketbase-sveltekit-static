@@ -8,7 +8,7 @@ import { pb } from '$lib/pocketbase';
 
 import type { User } from './types';
 
-export const user = writable<User | null>(null);
+export const user = writable<User>(null!);
 
 pb.authStore.onChange((_, authRecord) => {
 	user.set(authRecord as User);
